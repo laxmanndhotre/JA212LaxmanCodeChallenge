@@ -1,0 +1,19 @@
+package com.example.demo.services;
+
+import java.util.List;
+import java.util.Optional;
+
+import com.example.demo.entities.Player;
+import com.example.demo.exceptions.PlayerNotFoundException;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface IPlayerService {
+    List<PlayerDTO> getAllPlayers();
+    Optional<PlayerDTO> getPlayerById(Integer id);
+    PlayerDTO addPlayer(PlayerDTO playerDTO);
+    PlayerDTO updatePlayer(Integer id, PlayerDTO newPlayerDTO);
+    void deletePlayer(Integer id);
+}
+

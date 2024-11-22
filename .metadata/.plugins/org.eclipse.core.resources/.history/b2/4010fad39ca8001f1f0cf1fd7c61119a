@@ -1,0 +1,64 @@
+package com.example.demo.services;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.dto.PlayerDTO;
+import com.example.demo.entities.Player;
+import com.example.demo.exceptions.PlayerNotFoundException;
+import com.example.demo.mapper.PlayerMapper;
+import com.example.demo.repositories.PlayerRepository;
+
+@Service
+public class PlayerService implements IPlayerService {
+    @Autowired
+    private PlayerRepository playerRepository;
+
+    @Override
+    public List<PlayerDTO> getAllPlayers() {
+        return playerRepository.findAll().stream()
+                .map(PlayerMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Optional<PlayerDTO> getPlayerById(Integer id) {
+        return playerRepository.findById(id)
+                .map(PlayerMapper::toDto);
+    }
+
+    @Override
+    public PlayerDTO addPlayer(PlayerDTO playerDTO) {
+        Player player = PlayerMapper.toEntity(playerDTO);
+        Player savedPlayer = playerRepository.save(player);
+        return PlayerMapper.toDto(savedPlayer);
+    }
+
+    @Override
+    public PlayerDTO updatePlayer(Integer id, PlayerDTO newPlayerDTO) throws PlayerNotFoundException {
+        Optional<Player> op = playerRepository.findById(id);
+        if (op.isPresent()) {
+            Player player = op.get();
+            player.setPlayer_name(newPlayerDTO.getPlayer_name());
+            player.setJersey_no(newPlayerDTO.getJersey_no());
+            player.setMatches(newPlayerDTO.getMatches());
+            player.setRole(newPlayerDTO.getRole());
+            player.setTeam(newPlayerDTO.getTeam());
+            player.setCountry_state(newPlayerDTO.getCountry_state());
+            player.setDesc(newPlayerDTO.getDescription());
+            Player updatedPlayer = playerRepository.save(player);
+            return PlayerMapper.toDto(updatedPlayer);
+        } else {
+            throw new PlayerNotFoundException("No player with that id");
+        }
+    }
+
+    @Override
+    public void deletePlayer(Integer id) {
+        playerRepository.deleteById(id);
+    }
+}
