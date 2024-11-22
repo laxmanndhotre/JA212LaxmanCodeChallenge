@@ -1,0 +1,68 @@
+package com.example.demo.services;
+
+import com.example.demo.exceptions.PlayerNotFoundException;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.entities.Player;
+import com.example.demo.repositories.PlayerRepository;
+
+@Service
+public class PlayerService implements IPlayerService{
+	@Autowired
+	private PlayerRepository playerRepository;
+
+	@Override
+	public List<Player> getAllPlayers() {
+		// TODO Auto-generated method stub
+		return playerRepository.findAll();
+	}
+
+	@Override
+	public Optional<Player> getPlayerById(Integer id) throws PlayerNotFoundException {
+	    Optional<Player> optionalPlayer = playerRepository.findById(id);
+	    if (optionalPlayer.isPresent()) {
+	        return optionalPlayer;
+	    } else {
+	        throw new PlayerNotFoundException("Player with ID " + id + " not found");
+	    }
+	}
+
+	@Override
+	public Player addPlayer(Player player) {
+		// TODO Auto-generated method stub
+		return playerRepository.save(player);
+	}
+
+	@Override
+	public Player updatePlayer(Integer id, Player newPlayer) throws PlayerNotFoundException {
+		// TODO Auto-generated method stub
+		Optional<Player> op=playerRepository.findById(id);
+		if(op.isPresent()) {
+			Player pl=op.get();
+			pl.setPlayerName(newPlayer.getPlayerName());
+			pl.setJerseyNo(newPlayer.getJerseyNo());
+			pl.setMatches(newPlayer.getMatches());
+			pl.setRole(newPlayer.getRole());
+			pl.setTeam(newPlayer.getTeam());
+			pl.setCountryState(newPlayer.getCountryState());
+			pl.setDescription(newPlayer.getDescription());
+			return playerRepository.save(pl);
+		}
+		else {
+			throw new PlayerNotFoundException("no play with that id");
+		}
+		
+	}
+
+	@Override
+	public void deletePlayer(Integer id) {
+		// TODO Auto-generated method stub
+		playerRepository.deleteById(id);
+	}
+	
+}

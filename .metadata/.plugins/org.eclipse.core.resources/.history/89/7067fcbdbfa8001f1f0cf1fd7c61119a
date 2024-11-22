@@ -34,7 +34,7 @@ public class PlayerController {
     @Autowired
     private IPlayerService playerService;
 
-    @GetMapping("/getall")
+    @GetMapping
     public ResponseEntity<List<PlayerDTO>> getAllPlayers() {
         List<PlayerDTO> players = playerService.getAllPlayers();
         return new ResponseEntity<>(players, HttpStatus.OK);
@@ -55,7 +55,7 @@ public class PlayerController {
 		return null;
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<?> addPlayer(@Valid @RequestBody PlayerDTO dto, BindingResult result) {
         if (result.hasErrors()) {
             List<String> errors = result.getFieldErrors().stream()
@@ -78,7 +78,7 @@ public class PlayerController {
         try {
             PlayerDTO updatedPlayer = playerService.updatePlayer(id, dto);
             return new ResponseEntity<>(updatedPlayer, HttpStatus.OK);
-        } catch ( PlayerNotFoundException e) {
+        } catch (RuntimeException | PlayerNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }

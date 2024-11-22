@@ -1,0 +1,103 @@
+package com.example.demo.dto;
+
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
+public class PlayerDTO {
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer playerId;
+
+    @NotBlank(message = "Player name is mandatory")
+    @Size(max = 100, message = "Player name must be less than 100 characters")
+    private String playerName;
+
+    @NotNull(message = "Jersey number is mandatory")
+    @Min(value = 1, message = "Jersey number must be at least 1")
+    private Integer jerseyNo;
+
+    @NotBlank(message = "Role is mandatory")
+    private String role;
+
+    @NotNull(message = "Total matches is mandatory")
+    @Min(value = 0, message = "Total matches cannot be negative")
+    private Integer Matches;
+
+    @NotBlank(message = "Team name is mandatory")
+    private String team;
+
+    @NotBlank(message = "Country/State name is mandatory")
+    private String countryState;
+
+    @Size(max = 255, message = "Description must be less than 255 characters")
+    private String description;
+
+	public Integer getPlayerId() {
+		return playerId;
+	}
+
+	public void setPlayerId(Integer playerId) {
+		this.playerId = playerId;
+	}
+
+	public String getPlayerName() {
+		return playerName;
+	}
+
+	public void setPlayerName(String playerName) {
+		this.playerName = playerName;
+	}
+
+	public Integer getJerseyNo() {
+		return jerseyNo;
+	}
+
+	public void setJerseyNo(Integer jerseyNo) {
+		this.jerseyNo = jerseyNo;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public Integer getMatches() {
+		return Matches;
+	}
+
+	public void setMatches(Integer matches) {
+		Matches = matches;
+	}
+
+	public String getTeam() {
+		return team;
+	}
+
+	public void setTeam(String team) {
+		this.team = team;
+	}
+
+	public String getCountryState() {
+		return countryState;
+	}
+
+	public void setCountryState(String countryState) {
+		this.countryState = countryState;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+}

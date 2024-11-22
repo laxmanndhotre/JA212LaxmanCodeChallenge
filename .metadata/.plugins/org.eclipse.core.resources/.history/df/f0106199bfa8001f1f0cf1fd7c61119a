@@ -34,7 +34,7 @@ public class PlayerController {
     @Autowired
     private IPlayerService playerService;
 
-    @GetMapping("/getall")
+    @GetMapping
     public ResponseEntity<List<PlayerDTO>> getAllPlayers() {
         List<PlayerDTO> players = playerService.getAllPlayers();
         return new ResponseEntity<>(players, HttpStatus.OK);
@@ -42,20 +42,12 @@ public class PlayerController {
 
     @GetMapping("/{id}")
     public ResponseEntity<PlayerDTO> getPlayerById(@PathVariable Integer id) {
-        Optional<PlayerDTO> player;
-		try {
-			player = playerService.getPlayerById(id);
-		
+        Optional<PlayerDTO> player = playerService.getPlayerById(id);
         return player.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
                      .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-		}catch (PlayerNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<?> addPlayer(@Valid @RequestBody PlayerDTO dto, BindingResult result) {
         if (result.hasErrors()) {
             List<String> errors = result.getFieldErrors().stream()
@@ -78,7 +70,7 @@ public class PlayerController {
         try {
             PlayerDTO updatedPlayer = playerService.updatePlayer(id, dto);
             return new ResponseEntity<>(updatedPlayer, HttpStatus.OK);
-        } catch ( PlayerNotFoundException e) {
+        } catch (RuntimeException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }

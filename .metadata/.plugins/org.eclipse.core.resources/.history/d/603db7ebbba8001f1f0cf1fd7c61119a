@@ -11,7 +11,9 @@ public class Player {
 
 	
 
-	
+	public Player() {
+		super();
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,58 +34,91 @@ public class Player {
 	private String countryState;
 	@NotBlank(message = "description is required")
 	private String description;
-	public int getPlayerId() {
-		return playerId;
+	
+	
+
+	public Player(int player_id, String player_name, int jersey_no, String role, int matches, String team,
+			String country_state, String desc) {
+		super();
+		this.player_id = player_id;
+		this.player_name = player_name;
+		this.jersey_no = jersey_no;
+		this.role = role;
+		this.matches = matches;
+		this.team = team;
+		this.country_state = country_state;
+		this.description = desc;
 	}
-	public void setPlayerId(int playerId) {
-		this.playerId = playerId;
+
+	public int getPlayer_id() {
+		return player_id;
 	}
-	public String getPlayerName() {
-		return playerName;
+
+	public void setPlayer_id(int player_id) {
+		this.player_id = player_id;
 	}
-	public void setPlayerName(String playerName) {
-		this.playerName = playerName;
+
+	public String getPlayer_name() {
+		return player_name;
 	}
-	public int getJerseyNo() {
-		return jerseyNo;
+
+	public void setPlayer_name(String player_name) {
+		this.player_name = player_name;
 	}
-	public void setJerseyNo(int jerseyNo) {
-		this.jerseyNo = jerseyNo;
+
+	public int getJersey_no() {
+		return jersey_no;
 	}
+
+	public void setJersey_no(int jersey_no) {
+		this.jersey_no = jersey_no;
+	}
+
 	public String getRole() {
 		return role;
 	}
+
 	public void setRole(String role) {
 		this.role = role;
 	}
+
 	public int getMatches() {
 		return matches;
 	}
+
 	public void setMatches(int matches) {
 		this.matches = matches;
 	}
+
 	public String getTeam() {
 		return team;
 	}
+
 	public void setTeam(String team) {
 		this.team = team;
 	}
-	public String getCountryState() {
-		return countryState;
-	}
-	public void setCountryState(String countryState) {
-		this.countryState = countryState;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	
-	public Player() {
-		super();
+
+	public String getCountry_state() {
+		return country_state;
 	}
 
+	public void setCountry_state(String country_state) {
+		this.country_state = country_state;
+	}
+
+	public String getDesc() {
+		return description;
+	}
+
+	public void setDesc(String desc) {
+		this.description = desc;
+	}
+
+	@Override
+	public String toString() {
+		return "Player [player_id=" + player_id + ", player_name=" + player_name + ", jersey_no=" + jersey_no
+				+ ", role=" + role + ", matches=" + matches + ", team=" + team + ", country_state=" + country_state
+				+ ", desc=" + description + "]";
+	}
 	
 }

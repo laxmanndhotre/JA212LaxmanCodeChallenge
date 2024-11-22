@@ -1,0 +1,32 @@
+package com.example.demo.mapper;
+ 
+import com.example.demo.entities.*;
+import com.example.demo.dto.PlayerDTO;
+
+public class PlayerMapper {
+    public static PlayerDTO toDto(Player player) {
+        PlayerDTO dto = new PlayerDTO();
+        dto.setId(player.getPlayerId());
+        dto.setName(player.getPlayerName());
+        dto.setJerseyNumber(player.getJerseyNo());
+        dto.setRole(player.getRole());
+        dto.setTotalMatches(player.getMatches());
+        dto.setTeamName(player.getTeam());
+        dto.setCountryStateName(player.getCountryState());
+        dto.setDescription(player.getDescription());
+        return dto;
+    }
+
+    public static Player toEntity(PlayerDTO dto) {
+        Player player = new Player();
+        player.setPlayerId(dto.getId());
+        player.setPlayerName(dto.getName());
+        player.setJerseyNo(dto.getJerseyNumber());
+        player.setRole(dto.getRole());
+        player.setMatches(dto.getTotalMatches());
+        player.setTeam(dto.getTeamName());
+        player.setCountryState(dto.getCountryStateName());
+        player.setDescription(dto.getDescription());
+        return player;
+    }
+}
