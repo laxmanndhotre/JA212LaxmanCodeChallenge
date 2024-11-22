@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entities.Player;
-import com.example.demo.exceptions.PlayerNotFoundException;
 import com.example.demo.repositories.PlayerRepository;
 
 @Service
@@ -24,9 +23,13 @@ public class PlayerService implements IPlayerService{
 	}
 
 	@Override
-	public Optional<Player> getPlayerById(Integer id) {
-		// TODO Auto-generated method stub
-		return playerRepository.findById(id);
+	public Optional<Player> getPlayerById(Integer id) throws PlayerNotFoundException {
+	    Optional<Player> optionalPlayer = playerRepository.findById(id);
+	    if (optionalPlayer.isPresent()) {
+	        return optionalPlayer;
+	    } else {
+	        throw new PlayerNotFoundException("Player with ID " + id + " not found");
+	    }
 	}
 
 	@Override

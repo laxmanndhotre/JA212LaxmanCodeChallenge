@@ -38,7 +38,7 @@ public class PlayerController {
 	}
 	
 	@GetMapping("/getbyid/{id}")
-    public ResponseEntity<Player> getById(@PathVariable Integer id) {
+    public ResponseEntity<Player> getById(@PathVariable Integer id) throws PlayerNotFoundException {
         Optional<Player> pl = playerService.getPlayerById(id);
         return pl.map(value -> new ResponseEntity<>(value, HttpStatus.OK)) .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }

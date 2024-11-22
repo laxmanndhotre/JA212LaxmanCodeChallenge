@@ -9,7 +9,7 @@ import com.example.demo.exceptions.PlayerNotFoundException;
 public interface IPlayerService {
 	
 	    List<Player> getAllPlayers();
-	    Optional<Player> getPlayerById(Integer id);
+	    Optional<Player> getPlayerById(Integer id) throws PlayerNotFoundException;
 	    Player addPlayer(Player player);
 	    Player updatePlayer(Integer id, Player newPlayer) throws PlayerNotFoundException;
 	    void deletePlayer(Integer id);
