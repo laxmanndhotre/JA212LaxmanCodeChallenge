@@ -1,0 +1,17 @@
+package com.example.demo.services;
+
+import java.util.List;
+import java.util.Optional;
+
+import com.example.demo.entities.Player;
+
+public interface IPlayerService {
+	
+	    List<Player> getAllPlayers();
+	    Optional<Player> getPlayerById(Integer id);
+	    Player addPlayer(Player player);
+	    Player updatePlayer(Integer id, Player newPlayer);
+	    void deletePlayer(Integer id);
+	
+
+}

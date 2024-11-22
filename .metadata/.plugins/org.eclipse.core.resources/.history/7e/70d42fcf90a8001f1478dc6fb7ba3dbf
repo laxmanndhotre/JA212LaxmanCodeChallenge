@@ -1,0 +1,7 @@
+package com.example.demo.exceptions;
+
+public class PlayerNotFoundException extends Exception {
+	PlayerNotFoundException(String message){
+		super(message);
+	}
+}

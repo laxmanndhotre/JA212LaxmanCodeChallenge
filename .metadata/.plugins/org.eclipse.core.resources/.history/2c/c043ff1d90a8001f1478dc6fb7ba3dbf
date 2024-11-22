@@ -1,0 +1,49 @@
+package com.example.demo.services;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.entities.Player;
+import com.example.demo.repositories.PlayerRepository;
+
+@Service
+public class PlayerService implements IPlayerService{
+	@Autowired
+	private PlayerRepository playerRepository;
+
+	@Override
+	public List<Player> getAllPlayers() {
+		return playerRepository.findAll();
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Optional<Player> getPlayerById(Integer id) {
+
+		// TODO Auto-generated method stub
+		return playerRepository.findById(id);
+	}
+
+	@Override
+	public Player addPlayer(Player player) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Player updatePlayer(Integer id, Player playerDetails) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deletePlayer(Integer id) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+}

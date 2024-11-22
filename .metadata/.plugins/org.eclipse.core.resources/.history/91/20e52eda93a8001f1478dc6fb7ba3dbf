@@ -1,0 +1,55 @@
+package com.example.demo.controller;
+import com.example.demo.entities.Player;
+import com.example.demo.exceptions.PlayerNotFoundException;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.services.IPlayerService;
+
+@RestController 
+@RequestMapping("/api/players")
+public class PlayerController {
+	@Autowired
+	private IPlayerService playerService;
+	
+	@GetMapping("/all")
+	public ResponseEntity<List<Player>> getAllPlayers(){
+		List<Player> pl=playerService.getAllPlayers();
+		return new ResponseEntity<>(pl,HttpStatus.OK);
+	}
+	
+	@PostMapping("create/")
+	public ResponseEntity<Player> addPlayer(@RequestBody Player player) { 
+		Player newPlayer = playerService.addPlayer(player); 
+		return new ResponseEntity<>(newPlayer, HttpStatus.CREATED);
+	}
+	
+	@GetMapping("/getbyid/{id}")
+    public ResponseEntity<Player> getById(@PathVariable Integer id) {
+        Optional<Player> pl = playerService.getPlayerById(id);
+        return pl.map(value -> new ResponseEntity<>(value, HttpStatus.OK)) .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+	@PutMapping("update/{id}")
+	public ResponseEntity<Player> updatedPlayer(@PathVariable Integer id, @RequestBody Player newPlayer){
+		try {
+			Player updatedPlayer = playerService.updatePlayer(id, newPlayer);
+			return new ResponseEntity<>(updatedPlayer, HttpStatus.OK);
+		} catch (PlayerNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+}

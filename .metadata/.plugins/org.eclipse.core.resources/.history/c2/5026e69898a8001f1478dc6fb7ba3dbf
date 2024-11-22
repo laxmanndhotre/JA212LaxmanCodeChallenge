@@ -1,0 +1,124 @@
+package com.example.demo.entities;
+
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.*;
+
+@Entity
+public class Player {
+
+	
+
+	public Player() {
+		super();
+	}
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int player_id;
+	@NotBlank(message = "player name is required") 
+	@Size(max = 100, message = "Player name must be less than 100 characters")
+	private String player_name;
+	@Min(value=1, message = "jersey no can only start from 1")
+	private int jersey_no;
+	@NotBlank(message = "role is required")
+	private String role;
+	@NotNull(message = "total matches is required") 
+	@Min(value = 0, message = "matches played cannot be negative")
+	private int matches;
+	@NotBlank(message = "team name is mandatory")
+	private String team;
+	@NotBlank(message = "country/state name is mandatory")
+	private String country_state;
+	@NotBlank(message = "description is required")
+	private String description;
+	
+	
+
+	public Player(int player_id, String player_name, int jersey_no, String role, int matches, String team,
+			String country_state, String desc) {
+		super();
+		this.player_id = player_id;
+		this.player_name = player_name;
+		this.jersey_no = jersey_no;
+		this.role = role;
+		this.matches = matches;
+		this.team = team;
+		this.country_state = country_state;
+		this.description = desc;
+	}
+
+	public int getPlayer_id() {
+		return player_id;
+	}
+
+	public void setPlayer_id(int player_id) {
+		this.player_id = player_id;
+	}
+
+	public String getPlayer_name() {
+		return player_name;
+	}
+
+	public void setPlayer_name(String player_name) {
+		this.player_name = player_name;
+	}
+
+	public int getJersey_no() {
+		return jersey_no;
+	}
+
+	public void setJersey_no(int jersey_no) {
+		this.jersey_no = jersey_no;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public int getMatches() {
+		return matches;
+	}
+
+	public void setMatches(int matches) {
+		this.matches = matches;
+	}
+
+	public String getTeam() {
+		return team;
+	}
+
+	public void setTeam(String team) {
+		this.team = team;
+	}
+
+	public String getCountry_state() {
+		return country_state;
+	}
+
+	public void setCountry_state(String country_state) {
+		this.country_state = country_state;
+	}
+
+	public String getDesc() {
+		return description;
+	}
+
+	public void setDesc(String desc) {
+		this.description = desc;
+	}
+
+	@Override
+	public String toString() {
+		return "Player [player_id=" + player_id + ", player_name=" + player_name + ", jersey_no=" + jersey_no
+				+ ", role=" + role + ", matches=" + matches + ", team=" + team + ", country_state=" + country_state
+				+ ", desc=" + desc + "]";
+	}
+	
+}
