@@ -1,0 +1,86 @@
+<!-- player.component.html -->
+<form #playerForm="ngForm" method="post" class="container col-md-4" (ngSubmit)="onSubmit(playerForm.value)">
+  <div class="form-group">
+    <label for="playerId">Player ID:</label>
+    <input type="text" class="form-control" id="playerId" name="playerId" #playerIdControl="ngModel" required ngModel>
+    <span style="color: red;" *ngIf="playerIdControl.touched && playerIdControl.invalid">Player ID is mandatory</span>
+  </div>
+
+  <div class="form-group">
+    <label for="playerName">Player Name:</label>
+    <input type="text" class="form-control" id="playerName" name="playerName" #playerNameControl="ngModel" required ngModel>
+    <span style="color: red;" *ngIf="playerNameControl.touched && playerNameControl.invalid">Player Name is mandatory</span>
+  </div>
+
+  <div class="form-group">
+    <label for="jerseyNo">Jersey Number:</label>
+    <input type="number" class="form-control" id="jerseyNo" name="jerseyNo" #jerseyNoControl="ngModel" required ngModel>
+    <span style="color: red;" *ngIf="jerseyNoControl.touched && jerseyNoControl.invalid">Jersey Number is mandatory</span>
+  </div>
+
+  <div class="form-group">
+    <label for="role">Role:</label>
+    <input type="text" class="form-control" id="role" name="role" #roleControl="ngModel" required ngModel>
+    <span style="color: red;" *ngIf="roleControl.touched && roleControl.invalid">Role is mandatory</span>
+  </div>
+
+  <div class="form-group">
+    <label for="matches">Matches:</label>
+    <input type="number" class="form-control" id="matches" name="matches" #matchesControl="ngModel" required ngModel>
+    <span style="color: red;" *ngIf="matchesControl.touched && matchesControl.invalid">Matches is mandatory</span>
+  </div>
+
+  <div class="form-group">
+    <label for="team">Team:</label>
+    <input type="text" class="form-control" id="team" name="team" #teamControl="ngModel" required ngModel>
+    <span style="color: red;" *ngIf="teamControl.touched && teamControl.invalid">Team is mandatory</span>
+  </div>
+
+  <div class="form-group">
+    <label for="countryState">Country/State:</label>
+    <input type="text" class="form-control" id="countryState" name="countryState" #countryStateControl="ngModel" required ngModel>
+    <span style="color: red;" *ngIf="countryStateControl.touched && countryStateControl.invalid">Country/State is mandatory</span>
+  </div>
+
+  <div class="form-group">
+    <label for="description">Description:</label>
+    <textarea class="form-control" id="description" name="description" #descriptionControl="ngModel" required ngModel></textarea>
+    <span style="color: red;" *ngIf="descriptionControl.touched && descriptionControl.invalid">Description is mandatory</span>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="playerForm.invalid">Submit</button>
+</form>
+
+<!-- Player List -->
+<div class="container mt-4">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Player ID</th>
+        <th>Player Name</th>
+        <th>Jersey Number</th>
+        <th>Role</th>
+        <th>Matches</th>
+        <th>Team</th>
+        <th>Country/State</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let player of players">
+        <td>{{ player.playerId }}</td>
+        <td>{{ player.playerName }}</td>
+        <td>{{ player.jerseyNo }}</td>
+        <td>{{ player.role }}</td>
+        <td>{{ player.matches }}</td>
+        <td>{{ player.team }}</td>
+        <td>{{ player.countryState }}</td>
+        <td>{{ player.description }}</td>
+        <td>
+          <button class="btn btn-info btn-sm" (click)="loadPlayer(player)">Edit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
