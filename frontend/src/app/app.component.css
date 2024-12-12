@@ -1,0 +1,60 @@
+/* app.component.css */
+.app-container {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.btn-delete {
+  margin-left: auto;
+}
+
+header {
+  background-color: rgb(105, 0, 190);
+  color: white;
+  padding: 15px;
+}
+
+header h1 {
+  margin: 0;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+nav ul li a.active {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+footer {
+  background-color: #222;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}

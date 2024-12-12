@@ -1,0 +1,92 @@
+.add-player-container {
+  width: 60%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.error-message, .success-message {
+  text-align: center;
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-bottom: 20px;
+}
+
+.error-message {
+  color: rgb(116, 88, 88);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.success-message {
+  color: rgb(224, 185, 255);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.player-form {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+input, select, textarea {
+  padding: 10px;
+  font-size: 14px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+}
+
+.btn-submit {
+  background-color: #8a009c;
+  color: white;
+}
+
+.btn-submit:hover {
+  background-color: rgb(229, 198, 255);
+}
+
+.btn-reset {
+  background-color: rgb(224, 185, 255);
+  color: white;
+}
+
+.btn-reset:hover {
+  background-color: #e53935;
+}

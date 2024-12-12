@@ -1,5 +1,4 @@
 package com.example.demo.controller;
-import com.example.demo.entities.Player;
 import com.example.demo.exceptions.PlayerNotFoundException;
 
 import java.util.List;
@@ -8,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,12 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.services.IPlayerService;
 
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-
 import jakarta.validation.Valid;
 import java.util.stream.Collectors;
 import com.example.demo.dto.*;
-import com.example.demo.mapper.*;
 
 @RestController
 @RequestMapping("/api/players")
@@ -33,13 +30,13 @@ public class PlayerController {
 
     @Autowired
     private IPlayerService playerService;
-
-    @GetMapping("/getall")
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping
     public ResponseEntity<List<PlayerDTO>> getAllPlayers() {
         List<PlayerDTO> players = playerService.getAllPlayers();
         return new ResponseEntity<>(players, HttpStatus.OK);
     }
-
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/{id}")
     public ResponseEntity<PlayerDTO> getPlayerById(@PathVariable Integer id) {
         Optional<PlayerDTO> player;
@@ -54,8 +51,8 @@ public class PlayerController {
 		}
 		return null;
     }
-
-    @PostMapping("/create")
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping()
     public ResponseEntity<?> addPlayer(@Valid @RequestBody PlayerDTO dto, BindingResult result) {
         if (result.hasErrors()) {
             List<String> errors = result.getFieldErrors().stream()
@@ -66,7 +63,7 @@ public class PlayerController {
         PlayerDTO newPlayer = playerService.addPlayer(dto);
         return new ResponseEntity<>(newPlayer, HttpStatus.CREATED);
     }
-
+    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("/{id}")
     public ResponseEntity<?> updatePlayer(@PathVariable Integer id, @Valid @RequestBody PlayerDTO dto, BindingResult result) {
         if (result.hasErrors()) {
@@ -82,7 +79,7 @@ public class PlayerController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
+    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePlayer(@PathVariable Integer id) {
         playerService.deletePlayer(id);
